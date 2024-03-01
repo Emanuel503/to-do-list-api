@@ -64,3 +64,33 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## Requerimiento
+
+Listar todas las listas de tareas
+
+Las tareas deben de tener
+    -Nombre de la tarea
+    -Descripcion de la tarea (opcional)
+    -Color de la tarea (opcional)
+    -Categoria de la tarea (opcional)
+    -Usuario que crea la tarea
+    -Fecha de creacion de la tarea
+    -Poder compartir la tarea con otra persona
+    -Fecha de inicio y fecha fin de la tarea opcional
+    -En la descriocion el usuario podra crear listas, escribir palabras en negritas, cursivas, etc.
+
+Inicio de sesion con roles
+
+Registro de usuarios
+    -Subir una imagen de perfil
+    -nombre 
+    -email
+    -password
+
+Usuario administardor
+    -Listar todos los usuarios
+    -Crear grupos y roles
+    -Ver el trafico
+    -Dashboard
