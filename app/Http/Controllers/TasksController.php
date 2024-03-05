@@ -41,7 +41,7 @@ class TasksController extends Controller
         $task->category         = $request->category;
         $task->color            = $request->color;
         $task->start_date       = $request->start_date;
-        $task->start_end        = $request->start_end;
+        $task->end_date         = $request->end_date;
 
         $task->save();
 
