@@ -12,6 +12,7 @@ class TasksCategoriesController extends Controller
 
         $categories = Task::select('category', DB::raw('COUNT(*) as count'))
                                 ->groupBy('category')
+                                ->orderBy('category')
                                 ->get();
 
         return response()->json($categories);
