@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text("category")->comment("Task category")->nullable();
             $table->string("color", 6)->comment("Task color")->nullable();
             $table->date("start_date")->comment("Task start date")->nullable();
-            $table->date("start_end")->comment("Task end date")->nullable();
+            $table->date("end_date")->comment("Task end date")->nullable();
             $table->date("deleted_at")->comment("Date the task was deleted")->nullable();
             $table->timestamps();
         });

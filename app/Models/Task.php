@@ -18,7 +18,7 @@ class Task extends Model
         'category',
         'color',
         'start_date',
-        'start_end',
+        'end_date',
         'deleted_at',
     ];
 
