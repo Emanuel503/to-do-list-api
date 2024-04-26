@@ -20,4 +20,4 @@ Route::get('unauthorized', function(){
     return response()->json([
        'message' => 'Unauthorized'
     ], 401);
-});
+})->name('api.unauthorized');
