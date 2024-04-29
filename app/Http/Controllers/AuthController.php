@@ -15,11 +15,13 @@ class AuthController extends Controller
         $rules = array(
             'email'         => 'required|string|email|unique:users',
             'password'      => 'required|string',
+            'name'          => 'required|string',
         );
 
         $messages = array(
             'email.required'        => 'email is required',
             'password.required'     => 'password is required',
+            'name.required'         => 'name is required',
         );
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -63,12 +65,17 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (!Auth::attempt($credentials))
-            return response()->json(['message' => 'Unauthorized'], 401);
+            return response()->json([
+                'code' => 401,
+                'message' => 'Password or email is invalid',
+            ], 200);
 
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
 
         return response()->json([
+            'code' => 200,
+            'message' => 'Login success',
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
         ]);
