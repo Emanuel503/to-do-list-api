@@ -51,7 +51,8 @@ class AuthController extends Controller
         ], 201);
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $rules = array(
             'email'         => 'required|string|email',
             'password'      => 'required|string',
@@ -93,7 +94,8 @@ class AuthController extends Controller
         ]);
     }
 
-    public function unauthorized(){
+    public function unauthorized()
+    {
         return response()->json([
             'code'      => 401,
             'message'   => 'Unauthorized',
