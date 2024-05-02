@@ -27,7 +27,13 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+            return response()->json([
+                "code"      => 422,
+                "message"   => "User created error",
+                "data"      => [
+                    "errors" => $validator->errors(),
+                ],
+            ], 422);
         }
 
         $user = User::create([
@@ -37,9 +43,11 @@ class AuthController extends Controller
         ]);
 
         return response()->json([
-            "status"    => "success",
+            "code"      => 201,
             "message"   => "User created successfully",
-            "user"      => $user,
+            "data"      => [
+                'user'  => $user,
+            ],
         ], 201);
     }
 
@@ -66,22 +74,30 @@ class AuthController extends Controller
 
         if (!Auth::attempt($credentials))
             return response()->json([
-                'code' => 401,
-                'message' => 'Password or email is invalid',
+                'code'      => 401,
+                'message'   => 'Password or email is invalid',
+                'data'      => null
             ], 200);
 
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
 
         return response()->json([
-            'code' => 200,
-            'message' => 'Login success',
-            'access_token' => $tokenResult->accessToken,
-            'token_type' => 'Bearer',
+            'code'      => 200,
+            'message'   => 'Login success',
+            'data'      => [
+                'access_token'  => $tokenResult->accessToken,
+                'token_type'    => 'Bearer',
+                'user'          => $user
+            ]
         ]);
     }
 
     public function unauthorized(){
-        return response()->json(['message' => 'Unauthorized'], 401);
+        return response()->json([
+            'code'      => 401,
+            'message'   => 'Unauthorized',
+            'data'      => null
+        ], 401);
     }
 }
