@@ -6,18 +6,36 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 class TasksController extends Controller
 {
     public function index(){
-        $activeTasks = Task::where(['id_task_status' =>  1, 'user_id_register' => Auth::user()->id])->get();
-        $hiddenTasks = Task::where(['id_task_status' =>  2, 'user_id_register' => Auth::user()->id])->get();
+        $activeTasks = DB::table('tasks')
+                        ->join('users', 'users.id', '=' ,'tasks.user_id_register')
+                        ->select('tasks.*', 'users.name as user_name_register')
+                        ->where(['id_task_status' => 1, 'user_id_register' => Auth::user()->id])
+                        ->get();
+
+        $hiddenTasks = DB::table('tasks')
+                        ->join('users', 'users.id', '=' ,'tasks.user_id_register')
+                        ->select('tasks.*', 'users.name as user_name_register')
+                        ->where(['id_task_status' => 2, 'user_id_register' => Auth::user()->id])
+                        ->get();
+
+        $sharedTasks = DB::table('shared_tasks')
+                        ->join('tasks', 'tasks.id', '=' ,'shared_tasks.id_task')
+                        ->join('users', 'users.id', '=' ,'tasks.user_id_register')
+                        ->select('tasks.*', 'users.name as user_name_register')
+                        ->where(['id_user' => Auth::user()->id])
+                        ->get();
 
         $tasks = [
             'active' => $activeTasks,
-            'hidden' => $hiddenTasks
+            'hidden' => $hiddenTasks,
+            'shared' => $sharedTasks
         ];
 
         return response()->json([
