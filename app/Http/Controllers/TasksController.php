@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SharedTask;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -204,6 +206,41 @@ class TasksController extends Controller
         return response()->json([
             "code"      => 200,
             "message"   => "Task restored successfully",
+            'data'      => [
+                'task' => $task
+            ]
+        ]);
+    }
+
+    public function share($idTask, $idUser){
+
+        $user = User::find($idUser);
+        $task = Task::find($idTask);
+
+        if($user == null ||  $task == null){
+            return response()->json([
+                'code'      => 404,
+                'meesage' => 'Task shared failed',
+                'data'    => [
+                    null
+                ]
+            ], 404);
+        }
+
+        $shared = SharedTask::where(['id_user' => $idUser, 'id_task' => $idTask])->get();
+
+       if($shared == null){
+            $shared = new SharedTask();
+
+            $shared->id_user  = $idUser;
+            $shared->id_task  = $idTask;
+
+            $shared->save();
+       }
+
+        return response()->json([
+            "code"      => 200,
+            "message"   => "Task shared successfully",
             'data'      => [
                 'task' => $task
             ]
