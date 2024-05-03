@@ -14,6 +14,9 @@ Route::get('/unauthorized', [AuthController::class, 'unauthorized'])->name('unau
 
 Route::middleware('auth:api')->group(function(){
     Route::resource('/users', UsersController::class);
+
     Route::resource('/tasks', TasksController::class);
+    Route::put('/tasks/restore/{id}', [TasksController::class, 'restore']);
+
     Route::resource('/categories', TasksCategoriesController::class);
 });
