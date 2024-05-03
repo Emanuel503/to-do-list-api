@@ -19,8 +19,8 @@ class TaskFactory extends Factory
         $categories = ['comida', 'animales', 'otros', 'tareas', null];
 
         return [
-            'user_id_register'  => 1,
-            'id_task_status'    => 1,
+            'user_id_register'  => fake()->numberBetween(1, 11),
+            'id_task_status'    => fake()->numberBetween(1, 3),
             'title'             => fake()->text(100),
             'description'       => fake()->text(),
             'description'       => fake()->text(),

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->comment("Table to record shared tasks");
             $table->foreignIdFor(Task::class, 'id_task')->constrained('tasks', 'id')->comment("Shared task");
-            $table->foreignIdFor(User::class, 'id_user')->constrained('tasks_statuses', 'id')->comment("User shared tasks");
+            $table->foreignIdFor(User::class, 'id_user')->constrained('users', 'id')->comment("User shared tasks");
             $table->timestamps();
         });
     }

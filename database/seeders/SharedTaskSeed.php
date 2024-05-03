@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Task;
+use App\Models\SharedTask;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class TasksSeeder extends Seeder
+class SharedTaskSeed extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Task::factory(40)->create();
+        SharedTask::factory(40)->create();
     }
 }

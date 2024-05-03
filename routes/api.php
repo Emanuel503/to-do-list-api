@@ -17,6 +17,7 @@ Route::middleware('auth:api')->group(function(){
 
     Route::resource('/tasks', TasksController::class);
     Route::put('/tasks/restore/{id}', [TasksController::class, 'restore']);
+    Route::post('/tasks/share/{idTask}/{idUser}', [TasksController::class, 'shared']);
 
     Route::resource('/categories', TasksCategoriesController::class);
 });
