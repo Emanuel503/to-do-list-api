@@ -246,4 +246,29 @@ class TasksController extends Controller
             ]
         ]);
     }
+
+    public function deleteShared($id){
+
+        $shared = SharedTask::find($id);
+
+        if($shared == null){
+            return response()->json([
+                'code'      => 404,
+                'meesage' => 'Task shared deleted failed',
+                'data'    => [
+                    null
+                ]
+            ], 404);
+        }
+
+        $shared->delete();
+
+        return response()->json([
+            "code"      => 200,
+            "message"   => "Task shared deleted successfully",
+            'data'      => [
+                null
+            ]
+        ]);
+    }
 }
