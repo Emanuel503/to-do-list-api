@@ -18,6 +18,12 @@ class TasksCategoriesController extends Controller
                                 ->where('id_task_status', '<>', 3)
                                 ->get();
 
-        return response()->json($categories);
+        return response()->json([
+            'code'      => 200,
+            'message'   => 'List of categories successfully',
+            'data'      => [
+                'categories' => $categories
+            ]
+        ]);
     }
 }
