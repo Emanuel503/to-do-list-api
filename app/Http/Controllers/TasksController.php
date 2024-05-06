@@ -49,6 +49,23 @@ class TasksController extends Controller
         ]);
     }
 
+    public function show($id){
+
+        $task = DB::table('tasks')
+                        ->join('users', 'users.id', '=' ,'tasks.user_id_register')
+                        ->select('tasks.*', 'users.name as user_name_register')
+                        ->where(['tasks.id' => $id])
+                        ->get();
+
+        return response()->json([
+            'code'      => 200,
+            'message'   => 'List of tasks successfully',
+            'data'      => [
+                'task' => $task
+            ]
+        ]);
+    }
+
     public function store(Request $request){
 
         $rules = array(
