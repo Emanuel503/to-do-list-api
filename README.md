@@ -68,29 +68,46 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Requerimiento
 
-Listar todas las listas de tareas
+Listar todas las tareas del usuario ✅
+    -Tareas del usuario ✅
+    -Tareas compartidas ✅
+    -Tareas ocultadas ✅
 
-Las tareas deben de tener
-    -Nombre de la tarea
-    -Descripcion de la tarea (opcional)
-    -Color de la tarea (opcional)
-    -Categoria de la tarea (opcional)
-    -Usuario que crea la tarea
-    -Fecha de creacion de la tarea
-    -Poder compartir la tarea con otra persona
-    -Fecha de inicio y fecha fin de la tarea opcional
-    -En la descriocion el usuario podra crear listas, escribir palabras en negritas, cursivas, etc.
+Modificar las tareas ✅
+
+Crear nuevas tareas ✅
+    Las tareas deben de tener
+        -Nombre de la tarea ✅
+        -Descripcion de la tarea (opcional) ✅
+        -Color de la tarea (opcional) ✅
+        -Categoria de la tarea (opcional) ✅
+        -Usuario que crea la tarea ✅
+        -Fecha de creacion de la tarea ✅
+        -Fecha de inicio y fecha fin de la tarea opcional ✅
+        -En la descripcion el usuario podra crear listas, escribir palabras en negritas, cursivas, etc.
+
+Eliminar tareas ✅
+
+Restaurar tareas ✅
+
+Compartir tareas con otra persona ✅
+
+Las tareas que son elimiadas quedaran en la papelera durante 30 dias, luego de ese tiempo seran eliminadas
 
 Inicio de sesion con roles
 
 Registro de usuarios
     -Subir una imagen de perfil
-    -nombre 
-    -email
-    -password
+    -nombre ✅
+    -email ✅
+    -password ✅
 
 Usuario administardor
     -Listar todos los usuarios
     -Crear grupos y roles
-    -Ver el trafico
-    -Dashboard
+    -Dashboard (Ver el trafico de usuarios conectados, cantidad de registros, usuarios conectados, etc) 
+
+Validaciones ✅
+    -Las tareas solo las puede modificar, eliminar, compartir, restaurar el usuario que las creo
+    -Los usuarios solo pueden manipular la apliacion solo cuando esten autenticados
+    -Validar las rutas por roles
