@@ -145,16 +145,6 @@ class TasksController extends Controller
 
         $task = Task::find($id);
 
-        if($task == null){
-            return response()->json([
-                'code'      => 404,
-                'meesage' => 'Task update failed',
-                'data'    => [
-                    null
-                ]
-            ], 404);
-        }
-
         $task->id_task_status   = $request->id_task_status ? $request->id_task_status : $task->id_task_status;;
         $task->title            = $request->title ? $request->title : $task->title;
         $task->description      = $request->description ? $request->description: $task->description;
@@ -178,16 +168,6 @@ class TasksController extends Controller
 
         $task = Task::find($id);
 
-        if($task == null){
-            return response()->json([
-                'code'      => 404,
-                'meesage' => 'Task deleted failed',
-                'data'    => [
-                    null
-                ]
-            ], 404);
-        }
-
         $task->deleted_at       = Carbon::now();
         $task->id_task_status   = 3;
 
@@ -205,16 +185,6 @@ class TasksController extends Controller
     public function restore($id){
         $task = Task::find($id);
 
-        if($task == null){
-            return response()->json([
-                'code'      => 404,
-                'meesage' => 'Task restored failed',
-                'data'    => [
-                    null
-                ]
-            ], 404);
-        }
-
         $task->deleted_at       = null;
         $task->id_task_status   = 1;
 
@@ -229,10 +199,10 @@ class TasksController extends Controller
         ]);
     }
 
-    public function share($idTask, $idUser){
+    public function share($task, $user){
 
-        $user = User::find($idUser);
-        $task = Task::find($idTask);
+        $task = Task::find($task);
+        $user = User::find($user);
 
         if($user == null ||  $task == null){
             return response()->json([
@@ -244,13 +214,13 @@ class TasksController extends Controller
             ], 404);
         }
 
-        $shared = SharedTask::where(['id_user' => $idUser, 'id_task' => $idTask])->get();
+        $shared = SharedTask::where(['id_user' => $user->id, 'id_task' => $task->id])->first();
 
        if($shared == null){
             $shared = new SharedTask();
 
-            $shared->id_user  = $idUser;
-            $shared->id_task  = $idTask;
+            $shared->id_user  = $user->id;
+            $shared->id_task  = $task->id;
 
             $shared->save();
        }
@@ -264,9 +234,9 @@ class TasksController extends Controller
         ]);
     }
 
-    public function deleteShared($id){
+    public function deleteShare($task, $user){
 
-        $shared = SharedTask::find($id);
+        $shared = SharedTask::where(['id_user' => $user, 'id_task' => $task])->first();
 
         if($shared == null){
             return response()->json([
