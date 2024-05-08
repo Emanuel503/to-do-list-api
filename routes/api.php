@@ -14,7 +14,10 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::get('/unauthorized', [AuthController::class, 'unauthorized'])->name('unauthorized');
 
 Route::middleware('auth:api')->group(function(){
-    Route::resource('/users', UsersController::class);
+
+    Route::prefix('users')->group(function(){
+        Route::get('/', [UsersController::class, 'index']);
+    });
 
     Route::prefix('tasks')->group(function () {
         Route::get('/', [TasksController::class, 'index']);
@@ -27,5 +30,7 @@ Route::middleware('auth:api')->group(function(){
         Route::delete('/share/{task}/{user}', [TasksController::class, 'deleteShare'])->middleware(EnsureTaskBelongsToUser::class);
     });
 
-    Route::resource('/categories', TasksCategoriesController::class);
+    Route::prefix('categories')->group(function () {
+        Route::get('/', [TasksCategoriesController::class, 'index']);
+    });
 });
