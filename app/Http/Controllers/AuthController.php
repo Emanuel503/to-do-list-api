@@ -100,6 +100,6 @@ class AuthController extends Controller
             'code'      => 401,
             'message'   => 'Unauthorized',
             'data'      => null
-        ], 401);
+        ], 403);
     }
 }
