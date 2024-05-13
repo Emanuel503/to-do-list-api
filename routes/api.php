@@ -16,24 +16,28 @@ Route::get('/unauthorized', [AuthController::class, 'unauthorized'])->name('unau
 
 Route::middleware('auth:api')->group(function(){
 
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard.index');
+    Route::group(['middleware' => ['role:Admin']], function () {
+        Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard.index');
 
-    Route::prefix('users')->name('admin.users.')->group(function(){
-        Route::get('/', [UsersController::class, 'index'])->name('index');
+        Route::prefix('users')->name('admin.users.')->group(function(){
+            Route::get('/', [UsersController::class, 'index'])->name('index');
+        });
     });
 
-    Route::prefix('tasks')->name('user.tasks.')->group(function () {
-        Route::get('/', [TasksController::class, 'index'])->name('index');
-        Route::get('/{task}', [TasksController::class, 'show'])->middleware(EnsureTaskBelongsToUser::class)->name('show');
-        Route::post('/', [TasksController::class, 'store'])->name('store');
-        Route::put('/{task}', [TasksController::class, 'update'])->middleware(EnsureTaskBelongsToUser::class)->name('update');
-        Route::delete('/{task}', [TasksController::class, 'destroy'])->middleware(EnsureTaskBelongsToUser::class)->name('destroy');
-        Route::put('/restore/{task}', [TasksController::class, 'restore'])->middleware(EnsureTaskBelongsToUser::class)->name('restore');
-        Route::post('/share/{task}/{user}', [TasksController::class, 'share'])->middleware(EnsureTaskBelongsToUser::class)->name('share');
-        Route::delete('/share/{task}/{user}', [TasksController::class, 'deleteShare'])->middleware(EnsureTaskBelongsToUser::class)->name('deleteShare');
-    });
+    Route::group(['middleware' => ['role:Admin|User',]], function () {
+        Route::prefix('tasks')->name('user.tasks.')->group(function () {
+            Route::get('/', [TasksController::class, 'index'])->name('index');
+            Route::get('/{task}', [TasksController::class, 'show'])->middleware(EnsureTaskBelongsToUser::class)->name('show');
+            Route::post('/', [TasksController::class, 'store'])->name('store');
+            Route::put('/{task}', [TasksController::class, 'update'])->middleware(EnsureTaskBelongsToUser::class)->name('update');
+            Route::delete('/{task}', [TasksController::class, 'destroy'])->middleware(EnsureTaskBelongsToUser::class)->name('destroy');
+            Route::put('/restore/{task}', [TasksController::class, 'restore'])->middleware(EnsureTaskBelongsToUser::class)->name('restore');
+            Route::post('/share/{task}/{user}', [TasksController::class, 'share'])->middleware(EnsureTaskBelongsToUser::class)->name('share');
+            Route::delete('/share/{task}/{user}', [TasksController::class, 'deleteShare'])->middleware(EnsureTaskBelongsToUser::class)->name('deleteShare');
+        });
 
-    Route::prefix('categories')->name('user.categories.')->group(function () {
-        Route::get('/', [TasksCategoriesController::class, 'index'])->name('index');
+        Route::prefix('categories')->name('user.categories.')->group(function () {
+            Route::get('/', [TasksCategoriesController::class, 'index'])->name('index');
+        });
     });
 });
