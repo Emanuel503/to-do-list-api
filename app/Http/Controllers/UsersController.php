@@ -39,7 +39,7 @@ class UsersController extends Controller
             'email'         => 'required|string|email|unique:users',
             'password'      => 'required|string',
             'name'          => 'required|string',
-            'rol'           => 'required|string',
+            'rol'           => 'required|string|exists:roles,name',
             'image'         => 'image',
         );
 
