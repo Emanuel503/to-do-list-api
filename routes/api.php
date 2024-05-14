@@ -21,6 +21,8 @@ Route::middleware('auth:api')->group(function(){
 
         Route::prefix('users')->name('admin.users.')->group(function(){
             Route::get('/', [UsersController::class, 'index'])->name('index');
+            Route::get('/{user}', [UsersController::class, 'show'])->name('show');
+            Route::post('/', [UsersController::class, 'store'])->name('store');
         });
     });
 
