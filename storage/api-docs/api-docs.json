@@ -223,12 +223,27 @@
                 },
                 "security": [
                     {
-                        "petstore_auth": [
-                            "write:pets",
-                            "read:pets"
-                        ]
+                        "passport": []
                     }
                 ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "https",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://127.0.0.1:9000/oauth/authorize",
+                        "tokenUrl": "http://127.0.0.1:9000/oauth/token",
+                        "refreshUrl": "http://127.0.0.1:9000/token/refresh",
+                        "scopes": []
+                    }
+                }
             }
         }
     },
