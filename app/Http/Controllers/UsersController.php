@@ -40,7 +40,7 @@ class UsersController extends Controller
             'password'      => 'required|string',
             'name'          => 'required|string',
             'rol'           => 'required|string|exists:roles,name',
-            'image'         => 'image',
+            'image'         => 'image|mimes:jpg,jpeg,png,gif|max:5000',
         );
 
         $messages = array(
@@ -62,10 +62,15 @@ class UsersController extends Controller
             ], 422);
         }
 
+        if ($request->hasFile('image')) {
+            $image = $request->file('image')->store('public/images');
+        }
+
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name'          => $request->name,
+            'email'         => $request->email,
+            'password'      => Hash::make($request->password),
+            'image'         => $image ?? null,
         ]);
 
         $user->assignRole($request->rol);

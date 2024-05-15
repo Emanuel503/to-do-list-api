@@ -16,6 +16,7 @@ class AuthController extends Controller
             'email'         => 'required|string|email|unique:users',
             'password'      => 'required|string',
             'name'          => 'required|string',
+            'image'         => 'image|mimes:jpg,jpeg,png,gif|max:5000'
         );
 
         $messages = array(
@@ -36,17 +37,32 @@ class AuthController extends Controller
             ], 422);
         }
 
+        if ($request->hasFile('image')) {
+            $image = $request->file('image')->store('public/images');
+        }
+
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name'          => $request->name,
+            'email'         => $request->email,
+            'password'      => Hash::make($request->password),
+            'image'         => $image ?? null
         ]);
+
+        $user->assignRole('User');
+
+        $credentials = request(['email', 'password']);
+        Auth::attempt($credentials);
+
+        $user = $request->user();
+        $tokenResult = $user->createToken('Personal Access Token');
 
         return response()->json([
             "code"      => 201,
             "message"   => "User created successfully",
             "data"      => [
                 'user'  => $user,
+                'access_token'  => $tokenResult->accessToken,
+                'token_type'    => 'Bearer',
             ],
         ], 201);
     }
