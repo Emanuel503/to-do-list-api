@@ -2,7 +2,11 @@
     "openapi": "3.0.0",
     "info": {
         "title": "API TASK",
-        "version": "1.0"
+        "description": "Swagger documentation for API TASK",
+        "contact": {
+            "email": "emanueljosemolina@gmail.com"
+        },
+        "version": "1.0.0"
     },
     "paths": {
         "/api/login": {
@@ -121,6 +125,116 @@
                     }
                 }
             }
+        },
+        "/api/dashboard": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login user and return a token",
+                "operationId": "2426415c7c4fc4c2674b0dff0ead6df1",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Login success"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "access_token": {
+                                                    "type": "string",
+                                                    "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjo..."
+                                                },
+                                                "token_type": {
+                                                    "type": "string",
+                                                    "example": "Bearer"
+                                                },
+                                                "user": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": "1"
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "Emanuel Molina"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "emanueljosemolina@gmail.com"
+                                                        },
+                                                        "email_verified_at": {
+                                                            "type": "string",
+                                                            "example": "2024-05-14 19:38:33"
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "example": "2024-05-14T19:38:33.000000Z"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "example": "2024-05-14T19:38:33.000000Z"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 401
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Password or email is invalid"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
         }
-    }
+    },
+    "security": [
+        {
+            "passport": []
+        }
+    ]
 }

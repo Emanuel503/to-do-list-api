@@ -7,10 +7,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+
 /**
-* @OA\Info(title="API TASK", version="1.0")
-*
+ * @OA\Info(
+ *    title="API TASK",
+ *    version="1.0.0",
+ *    description="Swagger documentation for API TASK",
+ *    @OA\Contact(
+ *         email="emanueljosemolina@gmail.com"
+ *    )
+ *  )
 */
+
 class AuthController extends Controller
 {
     public function register(Request $request)
