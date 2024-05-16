@@ -200,7 +200,8 @@
                             }
                         }
                     }
-                }
+                },
+                "security": []
             }
         },
         "/api/login": {
@@ -317,7 +318,8 @@
                             }
                         }
                     }
-                }
+                },
+                "security": []
             }
         },
         "/api/dashboard": {

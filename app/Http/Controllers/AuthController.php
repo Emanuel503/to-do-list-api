@@ -24,6 +24,7 @@ class AuthController extends Controller
     /**
      * @OA\Post(
      *     path="/api/register",
+     *     security={},
      *     tags={"Auth"},
      *     summary="Register user and return a token",
      *     @OA\RequestBody(
@@ -178,6 +179,7 @@ class AuthController extends Controller
     /**
      * @OA\Post(
      *     path="/api/login",
+     *     security={},
      *     tags={"Auth"},
      *     summary="Login user and return a token",
      *     @OA\RequestBody(
