@@ -131,7 +131,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "Login user and return a token",
+                "summary": "Dashboard Admin return information of system",
                 "operationId": "2426415c7c4fc4c2674b0dff0ead6df1",
                 "responses": {
                     "200": {
@@ -146,46 +146,17 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "Login success"
+                                            "example": "Dashboard successfully"
                                         },
                                         "data": {
                                             "properties": {
-                                                "access_token": {
-                                                    "type": "string",
-                                                    "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjo..."
+                                                "count_users": {
+                                                    "type": "integer",
+                                                    "example": "40"
                                                 },
-                                                "token_type": {
-                                                    "type": "string",
-                                                    "example": "Bearer"
-                                                },
-                                                "user": {
-                                                    "properties": {
-                                                        "id": {
-                                                            "type": "integer",
-                                                            "example": "1"
-                                                        },
-                                                        "name": {
-                                                            "type": "string",
-                                                            "example": "Emanuel Molina"
-                                                        },
-                                                        "email": {
-                                                            "type": "string",
-                                                            "example": "emanueljosemolina@gmail.com"
-                                                        },
-                                                        "email_verified_at": {
-                                                            "type": "string",
-                                                            "example": "2024-05-14 19:38:33"
-                                                        },
-                                                        "created_at": {
-                                                            "type": "string",
-                                                            "example": "2024-05-14T19:38:33.000000Z"
-                                                        },
-                                                        "updated_at": {
-                                                            "type": "string",
-                                                            "example": "2024-05-14T19:38:33.000000Z"
-                                                        }
-                                                    },
-                                                    "type": "object"
+                                                "count_tasks": {
+                                                    "type": "integer",
+                                                    "example": "56"
                                                 }
                                             },
                                             "type": "object"
@@ -204,11 +175,11 @@
                                     "properties": {
                                         "code": {
                                             "type": "number",
-                                            "example": 401
+                                            "example": 403
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "Password or email is invalid"
+                                            "example": "Unauthorized"
                                         },
                                         "data": {
                                             "type": "object",
