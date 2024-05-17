@@ -84,7 +84,6 @@ Crear nuevas tareas ✅
 - Usuario que crea la tarea ✅
 - Fecha de creacion de la tarea ✅
 - Fecha de inicio y fecha fin de la tarea opcional ✅
-- En la descripcion el usuario podra crear listas, escribir palabras en negritas, cursivas, etc.
 
 Eliminar tareas ✅
 
@@ -94,20 +93,22 @@ Compartir tareas con otra persona ✅
 
 Las tareas que son elimiadas quedaran en la papelera durante 30 dias, luego de ese tiempo seran eliminadas
 
-Inicio de sesion con roles
+Inicio de sesion con roles ✅
 
-Registro de usuarios
-- Subir una imagen de perfil
+Registro de usuarios ✅
+- Subir una imagen de perfil ✅
 - nombre ✅
 - email ✅
 - password ✅
 
 Usuario administardor
-- Listar todos los usuarios
-- Crear grupos y roles
+- Listar todos los usuarios ✅
+- Listar grupos y roles
 - Dashboard (Ver el trafico de usuarios conectados, cantidad de registros, usuarios conectados, etc) 
 
 Validaciones ✅
-- Las tareas solo las puede modificar, eliminar, compartir, restaurar el usuario que las creo
-- Los usuarios solo pueden manipular la apliacion solo cuando esten autenticados
-- Validar las rutas por roles
+- Las tareas solo las puede modificar, eliminar, compartir, restaurar el usuario que las creo ✅
+- Los usuarios solo pueden manipular la apliacion solo cuando esten autenticados ✅
+- Validar las rutas por roles ✅
+
+Documentar todos los endpoints de la API
