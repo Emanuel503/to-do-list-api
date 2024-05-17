@@ -395,6 +395,103 @@
                 ]
             }
         },
+        "/api/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get categories return a array of categories",
+                "operationId": "0e6c76e2e80c2dc85b5acade402ea492",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "List of categories successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "categories": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "category": {
+                                                                "type": "integer",
+                                                                "example": "Comida"
+                                                            },
+                                                            "count": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error: Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 403
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
         "/api/users": {
             "get": {
                 "tags": [
@@ -541,7 +638,8 @@
                                     },
                                     "rol": {
                                         "description": "Role of the user",
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": "Admin"
                                     }
                                 },
                                 "type": "object"
