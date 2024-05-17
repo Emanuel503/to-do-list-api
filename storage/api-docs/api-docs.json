@@ -492,6 +492,560 @@
                 ]
             }
         },
+        "/api/tasks": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Get list of tasks",
+                "description": "Returns a list of tasks categorized by their status",
+                "operationId": "49e73b9da657e3e2dac88d10e4ffaa4b",
+                "responses": {
+                    "200": {
+                        "description": "List of tasks successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "List of tasks successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "tasks": {
+                                                    "properties": {
+                                                        "active": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "integer",
+                                                                        "example": 18
+                                                                    },
+                                                                    "user_id_register": {
+                                                                        "type": "integer",
+                                                                        "example": 1
+                                                                    },
+                                                                    "id_task_status": {
+                                                                        "type": "integer",
+                                                                        "example": 1
+                                                                    },
+                                                                    "title": {
+                                                                        "type": "string",
+                                                                        "example": "Aut quia quo non dolores omnis illo. In et ut exercitationem ipsam dolorem officia enim est."
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string",
+                                                                        "example": "Fuga maiores sed et quia et possimus. Voluptatem ratione inventore neque est dolores."
+                                                                    },
+                                                                    "category": {
+                                                                        "type": "string",
+                                                                        "example": null
+                                                                    },
+                                                                    "color": {
+                                                                        "type": "string",
+                                                                        "example": "912141"
+                                                                    },
+                                                                    "start_date": {
+                                                                        "type": "string",
+                                                                        "example": null
+                                                                    },
+                                                                    "end_date": {
+                                                                        "type": "string",
+                                                                        "example": null
+                                                                    },
+                                                                    "deleted_at": {
+                                                                        "type": "string",
+                                                                        "example": null
+                                                                    },
+                                                                    "created_at": {
+                                                                        "type": "string",
+                                                                        "example": "2024-05-17 17:59:26"
+                                                                    },
+                                                                    "updated_at": {
+                                                                        "type": "string",
+                                                                        "example": "2024-05-17 17:59:26"
+                                                                    },
+                                                                    "user_name_register": {
+                                                                        "type": "string",
+                                                                        "example": "Emanuel Molina"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        },
+                                                        "hidden": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object"
+                                                            }
+                                                        },
+                                                        "shared": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "integer",
+                                                                        "example": 21
+                                                                    },
+                                                                    "user_id_register": {
+                                                                        "type": "integer",
+                                                                        "example": 5
+                                                                    },
+                                                                    "id_task_status": {
+                                                                        "type": "integer",
+                                                                        "example": 3
+                                                                    },
+                                                                    "title": {
+                                                                        "type": "string",
+                                                                        "example": "Aliquam quos illum nihil magni. Consequatur at alias quo. Illum et magni quibusdam totam."
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string",
+                                                                        "example": "Quae suscipit ducimus perspiciatis provident dolore deserunt sit enim. Maiores enim consequatur provident ullam sit. Doloremque magni quia aut voluptatem."
+                                                                    },
+                                                                    "category": {
+                                                                        "type": "string",
+                                                                        "example": "comida"
+                                                                    },
+                                                                    "color": {
+                                                                        "type": "string",
+                                                                        "example": "255869"
+                                                                    },
+                                                                    "start_date": {
+                                                                        "type": "string",
+                                                                        "example": null
+                                                                    },
+                                                                    "end_date": {
+                                                                        "type": "string",
+                                                                        "example": null
+                                                                    },
+                                                                    "deleted_at": {
+                                                                        "type": "string",
+                                                                        "example": null
+                                                                    },
+                                                                    "created_at": {
+                                                                        "type": "string",
+                                                                        "example": "2024-05-17 17:59:26"
+                                                                    },
+                                                                    "updated_at": {
+                                                                        "type": "string",
+                                                                        "example": "2024-05-17 17:59:26"
+                                                                    },
+                                                                    "user_name_register": {
+                                                                        "type": "string",
+                                                                        "example": "Uriel Crona DDS"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error: Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 403
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/tasks/{task}": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Returns a tasks",
+                "operationId": "0601826fbcb29466207f929545df29e9",
+                "parameters": [
+                    {
+                        "name": "task",
+                        "in": "path",
+                        "description": "ID of the task to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "List of tasks successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "task": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "user_id_register": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "id_task_status": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                        },
+                                                        "title": {
+                                                            "type": "string",
+                                                            "example": "Itaque sequi dicta adipisci quia sed. Dolorem et eligendi illum at. Quo non voluptatem et pariatur."
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "example": "Adipisci autem architecto natus aspernatur. Tempora dolorum dignissimos vel corrupti sapiente. Dignissimos quis labore neque qui placeat."
+                                                        },
+                                                        "category": {
+                                                            "type": "string",
+                                                            "example": "otros"
+                                                        },
+                                                        "color": {
+                                                            "type": "string",
+                                                            "example": "150524"
+                                                        },
+                                                        "start_date": {
+                                                            "type": "object",
+                                                            "example": null
+                                                        },
+                                                        "end_date": {
+                                                            "type": "object",
+                                                            "example": null
+                                                        },
+                                                        "deleted_at": {
+                                                            "type": "object",
+                                                            "example": null
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "example": "2024-05-14T19:38:33.000000Z"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "example": "2024-05-14T19:38:33.000000Z"
+                                                        },
+                                                        "user_name_register": {
+                                                            "type": "string",
+                                                            "example": "Emanuel Molina"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error: Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 403
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Task not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Task not found"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "example": null
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/tasks/": {
+            "post": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Save a new task",
+                "operationId": "1ec2e7b0b64311a66c45ea6a1de48323",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "List of tasks successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "task": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "user_id_register": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "id_task_status": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                        },
+                                                        "title": {
+                                                            "type": "string",
+                                                            "example": "Itaque sequi dicta adipisci quia sed. Dolorem et eligendi illum at. Quo non voluptatem et pariatur."
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "example": "Adipisci autem architecto natus aspernatur. Tempora dolorum dignissimos vel corrupti sapiente. Dignissimos quis labore neque qui placeat."
+                                                        },
+                                                        "category": {
+                                                            "type": "string",
+                                                            "example": "otros"
+                                                        },
+                                                        "color": {
+                                                            "type": "string",
+                                                            "example": "150524"
+                                                        },
+                                                        "start_date": {
+                                                            "type": "object",
+                                                            "example": null
+                                                        },
+                                                        "end_date": {
+                                                            "type": "object",
+                                                            "example": null
+                                                        },
+                                                        "deleted_at": {
+                                                            "type": "object",
+                                                            "example": null
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "example": "2024-05-14T19:38:33.000000Z"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "example": "2024-05-14T19:38:33.000000Z"
+                                                        },
+                                                        "user_name_register": {
+                                                            "type": "string",
+                                                            "example": "Emanuel Molina"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error: Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 403
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Task not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Task not found"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "example": null
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
         "/api/users": {
             "get": {
                 "tags": [

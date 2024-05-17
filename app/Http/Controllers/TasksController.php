@@ -14,6 +14,80 @@ use Illuminate\Validation\Rule;
 
 class TasksController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/api/tasks",
+     *     security={{"passport":{}}},
+     *     tags={"Tasks"},
+     *     summary="Get list of tasks",
+     *     description="Returns a list of tasks categorized by their status",
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of tasks successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=200),
+     *             @OA\Property(property="message", type="string", example="List of tasks successfully"),
+     *             @OA\Property(property="data", type="object",
+     *                 @OA\Property(property="tasks", type="object",
+     *                     @OA\Property(property="active", type="array",
+     *                         @OA\Items(type="object",
+     *                             @OA\Property(property="id", type="integer", example=18),
+     *                             @OA\Property(property="user_id_register", type="integer", example=1),
+     *                             @OA\Property(property="id_task_status", type="integer", example=1),
+     *                             @OA\Property(property="title", type="string", example="Aut quia quo non dolores omnis illo. In et ut exercitationem ipsam dolorem officia enim est."),
+     *                             @OA\Property(property="description", type="string", example="Fuga maiores sed et quia et possimus. Voluptatem ratione inventore neque est dolores."),
+     *                             @OA\Property(property="category", type="string", example=null),
+     *                             @OA\Property(property="color", type="string", example="912141"),
+     *                             @OA\Property(property="start_date", type="string", example=null),
+     *                             @OA\Property(property="end_date", type="string", example=null),
+     *                             @OA\Property(property="deleted_at", type="string", example=null),
+     *                             @OA\Property(property="created_at", type="string", example="2024-05-17 17:59:26"),
+     *                             @OA\Property(property="updated_at", type="string", example="2024-05-17 17:59:26"),
+     *                             @OA\Property(property="user_name_register", type="string", example="Emanuel Molina")
+     *                         )
+     *                     ),
+     *                     @OA\Property(property="hidden", type="array",
+     *                         @OA\Items(type="object")
+     *                     ),
+     *                     @OA\Property(property="shared", type="array",
+     *                         @OA\Items(type="object",
+     *                             @OA\Property(property="id", type="integer", example=21),
+     *                             @OA\Property(property="user_id_register", type="integer", example=5),
+     *                             @OA\Property(property="id_task_status", type="integer", example=3),
+     *                             @OA\Property(property="title", type="string", example="Aliquam quos illum nihil magni. Consequatur at alias quo. Illum et magni quibusdam totam."),
+     *                             @OA\Property(property="description", type="string", example="Quae suscipit ducimus perspiciatis provident dolore deserunt sit enim. Maiores enim consequatur provident ullam sit. Doloremque magni quia aut voluptatem."),
+     *                             @OA\Property(property="category", type="string", example="comida"),
+     *                             @OA\Property(property="color", type="string", example="255869"),
+     *                             @OA\Property(property="start_date", type="string", example=null),
+     *                             @OA\Property(property="end_date", type="string", example=null),
+     *                             @OA\Property(property="deleted_at", type="string", example=null),
+     *                             @OA\Property(property="created_at", type="string", example="2024-05-17 17:59:26"),
+     *                             @OA\Property(property="updated_at", type="string", example="2024-05-17 17:59:26"),
+     *                             @OA\Property(property="user_name_register", type="string", example="Uriel Crona DDS")
+     *                         )
+     *                     )
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error: Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Unauthenticated"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Invalid credentials",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=403),
+     *             @OA\Property(property="message", type="string", example="Unauthorized"),
+     *             @OA\Property(property="data", type="object", example=null),
+     *         )
+     *     )
+     * )
+     */
     public function index(){
         $activeTasks = DB::table('tasks')
                         ->join('users', 'users.id', '=' ,'tasks.user_id_register')
@@ -49,13 +123,80 @@ class TasksController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/tasks/{task}",
+     *     security={{"passport":{}}},
+     *     tags={"Tasks"},
+     *     summary="Returns a tasks",
+     *     @OA\Parameter(
+     *         name="task",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *         description="ID of the task to retrieve"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=200),
+     *             @OA\Property(property="message", type="string", example="List of tasks successfully"),
+     *             @OA\Property(property="data", type="object",
+     *                 @OA\Property(property="task", type="object",
+     *                      @OA\Property(property="id", type="integer", example=1),
+     *                      @OA\Property(property="user_id_register", type="integer", example=1),
+     *                      @OA\Property(property="id_task_status", type="integer", example=2),
+     *                      @OA\Property(property="title", type="string", example="Itaque sequi dicta adipisci quia sed. Dolorem et eligendi illum at. Quo non voluptatem et pariatur."),
+     *                      @OA\Property(property="description", type="string", example="Adipisci autem architecto natus aspernatur. Tempora dolorum dignissimos vel corrupti sapiente. Dignissimos quis labore neque qui placeat."),
+     *                      @OA\Property(property="category", type="string", example="otros"),
+     *                      @OA\Property(property="color", type="string", example="150524"),
+     *                      @OA\Property(property="start_date", type="object", example=null),
+     *                      @OA\Property(property="end_date", type="object", example=null),
+     *                      @OA\Property(property="deleted_at", type="object", example=null),
+     *                      @OA\Property(property="created_at", type="string", example="2024-05-14T19:38:33.000000Z"),
+     *                      @OA\Property(property="updated_at", type="string", example="2024-05-14T19:38:33.000000Z"),
+     *                      @OA\Property(property="user_name_register", type="string", example="Emanuel Molina"),
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *      @OA\Response(
+     *         response=401,
+     *         description="Error: Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Unauthenticated"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Invalid credentials",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=403),
+     *             @OA\Property(property="message", type="string", example="Unauthorized"),
+     *             @OA\Property(property="data", type="object", example=null),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Task not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=404),
+     *             @OA\Property(property="message", type="string", example="Task not found"),
+     *             @OA\Property(property="data", type="array",
+     *                  @OA\Items(type="object", example=null)
+     *             )
+     *         )
+     *     )
+     * )
+     */
     public function show($id){
 
         $task = DB::table('tasks')
                         ->join('users', 'users.id', '=' ,'tasks.user_id_register')
                         ->select('tasks.*', 'users.name as user_name_register')
                         ->where(['tasks.id' => $id])
-                        ->get();
+                        ->first();
 
         return response()->json([
             'code'      => 200,
