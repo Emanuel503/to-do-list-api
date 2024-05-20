@@ -703,6 +703,217 @@
                         "passport": []
                     }
                 ]
+            },
+            "post": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Register a task",
+                "operationId": "c55168b216f825bfb38201acb8ddba12",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Buy cat food"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Buy two cat bags"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "example": "Task"
+                                    },
+                                    "color": {
+                                        "type": "string",
+                                        "example": "456456"
+                                    },
+                                    "start_date": {
+                                        "type": "string",
+                                        "example": "2024/04/02"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "example": "2024/04/05"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 201
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Task created successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "task": {
+                                                    "properties": {
+                                                        "user_id_register": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "id_task_status": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "title": {
+                                                            "type": "string",
+                                                            "example": "Buy cat food"
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "example": "Buy two cat bags"
+                                                        },
+                                                        "category": {
+                                                            "type": "string",
+                                                            "example": "Task"
+                                                        },
+                                                        "color": {
+                                                            "type": "string",
+                                                            "example": "456456"
+                                                        },
+                                                        "start_date": {
+                                                            "type": "string",
+                                                            "example": "2024-05-20T19:35:00.000000Z"
+                                                        },
+                                                        "end_date": {
+                                                            "type": "string",
+                                                            "example": "2024-05-20T19:35:00.000000Z"
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "example": "2024-05-14T19:38:33.000000Z"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "example": "2024-05-14T19:38:33.000000Z"
+                                                        },
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": "1"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error: Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 403
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Task creation failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 422
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Task creation failed"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "errors": {
+                                                    "properties": {
+                                                        "description": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "string",
+                                                                "example": "description is required"
+                                                            }
+                                                        },
+                                                        "start_date": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "string",
+                                                                "example": [
+                                                                    "The start date field must be a valid date.",
+                                                                    "The start date field must be a date before end date."
+                                                                ]
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
             }
         },
         "/api/tasks/{task}": {
@@ -879,15 +1090,60 @@
                         "passport": []
                     }
                 ]
-            }
-        },
-        "/api/tasks/": {
-            "post": {
+            },
+            "put": {
                 "tags": [
                     "Tasks"
                 ],
-                "summary": "Save a new task",
-                "operationId": "1ec2e7b0b64311a66c45ea6a1de48323",
+                "summary": "Update task",
+                "operationId": "34bc4d64c51b763b7437e84728cfd2cd",
+                "parameters": [
+                    {
+                        "name": "task",
+                        "in": "path",
+                        "description": "ID of the task",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Buy cat food"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Buy two cat bags"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "example": "Task"
+                                    },
+                                    "color": {
+                                        "type": "string",
+                                        "example": "456456"
+                                    },
+                                    "start_date": {
+                                        "type": "string",
+                                        "example": "2024/04/02"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "example": "2024/04/05"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -901,7 +1157,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "List of tasks successfully"
+                                            "example": "Task updated successfully"
                                         },
                                         "data": {
                                             "properties": {
@@ -909,7 +1165,7 @@
                                                     "properties": {
                                                         "id": {
                                                             "type": "integer",
-                                                            "example": 1
+                                                            "example": "1"
                                                         },
                                                         "user_id_register": {
                                                             "type": "integer",
@@ -917,35 +1173,31 @@
                                                         },
                                                         "id_task_status": {
                                                             "type": "integer",
-                                                            "example": 2
+                                                            "example": 1
                                                         },
                                                         "title": {
                                                             "type": "string",
-                                                            "example": "Itaque sequi dicta adipisci quia sed. Dolorem et eligendi illum at. Quo non voluptatem et pariatur."
+                                                            "example": "Buy cat food"
                                                         },
                                                         "description": {
                                                             "type": "string",
-                                                            "example": "Adipisci autem architecto natus aspernatur. Tempora dolorum dignissimos vel corrupti sapiente. Dignissimos quis labore neque qui placeat."
+                                                            "example": "Buy two cat bags"
                                                         },
                                                         "category": {
                                                             "type": "string",
-                                                            "example": "otros"
+                                                            "example": "Task"
                                                         },
                                                         "color": {
                                                             "type": "string",
-                                                            "example": "150524"
+                                                            "example": "456456"
                                                         },
                                                         "start_date": {
-                                                            "type": "object",
-                                                            "example": null
+                                                            "type": "string",
+                                                            "example": "2024-05-20"
                                                         },
                                                         "end_date": {
-                                                            "type": "object",
-                                                            "example": null
-                                                        },
-                                                        "deleted_at": {
-                                                            "type": "object",
-                                                            "example": null
+                                                            "type": "string",
+                                                            "example": "2024-05-20"
                                                         },
                                                         "created_at": {
                                                             "type": "string",
@@ -954,10 +1206,6 @@
                                                         "updated_at": {
                                                             "type": "string",
                                                             "example": "2024-05-14T19:38:33.000000Z"
-                                                        },
-                                                        "user_name_register": {
-                                                            "type": "string",
-                                                            "example": "Emanuel Molina"
                                                         }
                                                     },
                                                     "type": "object"
@@ -1018,7 +1266,7 @@
                                 "schema": {
                                     "properties": {
                                         "code": {
-                                            "type": "number",
+                                            "type": "intger",
                                             "example": 404
                                         },
                                         "message": {
@@ -1026,11 +1274,391 @@
                                             "example": "Task not found"
                                         },
                                         "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "example": null
-                                            }
+                                            "type": "object",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Task creation failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 422
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Task creation failed"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "errors": {
+                                                    "properties": {
+                                                        "description": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "string",
+                                                                "example": "description is required"
+                                                            }
+                                                        },
+                                                        "start_date": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "string",
+                                                                "example": [
+                                                                    "The start date field must be a valid date.",
+                                                                    "The start date field must be a date before end date."
+                                                                ]
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Delete task",
+                "operationId": "434ca5f1bddda08c6c5fedbe73ccfab8",
+                "parameters": [
+                    {
+                        "name": "task",
+                        "in": "path",
+                        "description": "ID of the task",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Task deleted successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "task": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": "1"
+                                                        },
+                                                        "user_id_register": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "id_task_status": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "title": {
+                                                            "type": "string",
+                                                            "example": "Buy cat food"
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "example": "Buy two cat bags"
+                                                        },
+                                                        "category": {
+                                                            "type": "string",
+                                                            "example": "Task"
+                                                        },
+                                                        "color": {
+                                                            "type": "string",
+                                                            "example": "456456"
+                                                        },
+                                                        "start_date": {
+                                                            "type": "string",
+                                                            "example": "2024-05-20"
+                                                        },
+                                                        "end_date": {
+                                                            "type": "string",
+                                                            "example": "2024-05-20"
+                                                        },
+                                                        "deleted_at": {
+                                                            "type": "string",
+                                                            "example": "2024-05-20T19:35:00.000000Z"
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "example": "2024-05-14T19:38:33.000000Z"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "example": "2024-05-14T19:38:33.000000Z"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error: Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 403
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Task not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "intger",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Task not found"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/tasks/restore/{task}": {
+            "put": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Restore task",
+                "operationId": "166648d87ca0c0639658ebdeb16a6791",
+                "parameters": [
+                    {
+                        "name": "task",
+                        "in": "path",
+                        "description": "ID of the task",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Task restored successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "task": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": "1"
+                                                        },
+                                                        "user_id_register": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "id_task_status": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "title": {
+                                                            "type": "string",
+                                                            "example": "Buy cat food"
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "example": "Buy two cat bags"
+                                                        },
+                                                        "category": {
+                                                            "type": "string",
+                                                            "example": "Task"
+                                                        },
+                                                        "color": {
+                                                            "type": "string",
+                                                            "example": "456456"
+                                                        },
+                                                        "start_date": {
+                                                            "type": "string",
+                                                            "example": "2024-05-20"
+                                                        },
+                                                        "end_date": {
+                                                            "type": "string",
+                                                            "example": "2024-05-20"
+                                                        },
+                                                        "deleted_at": {
+                                                            "type": "object",
+                                                            "example": null
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "example": "2024-05-14T19:38:33.000000Z"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "example": "2024-05-14T19:38:33.000000Z"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error: Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 403
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Task not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "intger",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Task not found"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
                                         }
                                     },
                                     "type": "object"

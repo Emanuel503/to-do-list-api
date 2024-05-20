@@ -207,6 +207,85 @@ class TasksController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/tasks",
+     *     security={{"passport":{}}},
+     *     tags={"Tasks"},
+     *     summary="Register a task",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="title", type="string", example="Buy cat food"),
+     *             @OA\Property(property="description", type="string", example="Buy two cat bags"),
+     *             @OA\Property(property="category", type="string", example="Task"),
+     *             @OA\Property(property="color", type="string", example="456456"),
+     *             @OA\Property(property="start_date", type="string", example="2024/04/02"),
+     *             @OA\Property(property="end_date", type="string", example="2024/04/05")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=201),
+     *             @OA\Property(property="message", type="string", example="Task created successfully"),
+     *             @OA\Property(property="data", type="object",
+     *                 @OA\Property(property="task", type="object",
+     *                       @OA\Property(property="user_id_register", type="integer", example=1),
+     *                       @OA\Property(property="id_task_status", type="integer", example=1),
+     *                       @OA\Property(property="title", type="string", example="Buy cat food"),
+     *                       @OA\Property(property="description", type="string", example="Buy two cat bags"),
+     *                       @OA\Property(property="category", type="string", example="Task"),
+     *                       @OA\Property(property="color", type="string", example="456456"),
+     *                       @OA\Property(property="start_date", type="string", example="2024-05-20T19:35:00.000000Z"),
+     *                       @OA\Property(property="end_date", type="string", example="2024-05-20T19:35:00.000000Z"),
+     *                       @OA\Property(property="created_at", type="string", example="2024-05-14T19:38:33.000000Z"),
+     *                       @OA\Property(property="updated_at", type="string", example="2024-05-14T19:38:33.000000Z"),
+     *                       @OA\Property(property="id", type="integer", example="1"),
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error: Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Unauthenticated"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Invalid credentials",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=403),
+     *             @OA\Property(property="message", type="string", example="Unauthorized"),
+     *             @OA\Property(property="data", type="object", example=null),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Task creation failed",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=422),
+     *             @OA\Property(property="message", type="string", example="Task creation failed"),
+     *             @OA\Property(property="data", type="object",
+     *                 @OA\Property(property="errors", type="object",
+     *                     @OA\Property(property="description", type="array",
+     *                        @OA\Items(type="string", example="description is required")
+     *                     ),
+     *                      @OA\Property(property="start_date", type="array",
+     *                         @OA\Items(type="string", example={
+     *                             "The start date field must be a valid date.",
+     *                             "The start date field must be a date before end date."
+     *                         })
+     *                     )
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *  )
+     */
     public function store(Request $request){
 
         $rules = array(
@@ -248,7 +327,7 @@ class TasksController extends Controller
         $task->save();
 
         return response()->json([
-            "code"      => 200,
+            "code"      => 201,
             "message"   => "Task created successfully",
             'data'      => [
                 'task' => $task
@@ -256,6 +335,101 @@ class TasksController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/tasks/{task}",
+     *     security={{"passport":{}}},
+     *     tags={"Tasks"},
+     *     summary="Update task",
+     *     @OA\Parameter(
+     *         name="task",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *         description="ID of the task"
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="title", type="string", example="Buy cat food"),
+     *             @OA\Property(property="description", type="string", example="Buy two cat bags"),
+     *             @OA\Property(property="category", type="string", example="Task"),
+     *             @OA\Property(property="color", type="string", example="456456"),
+     *             @OA\Property(property="start_date", type="string", example="2024/04/02"),
+     *             @OA\Property(property="end_date", type="string", example="2024/04/05")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=200),
+     *             @OA\Property(property="message", type="string", example="Task updated successfully"),
+     *             @OA\Property(property="data", type="object",
+     *                 @OA\Property(property="task", type="object",
+     *                       @OA\Property(property="id", type="integer", example="1"),
+     *                       @OA\Property(property="user_id_register", type="integer", example=1),
+     *                       @OA\Property(property="id_task_status", type="integer", example=1),
+     *                       @OA\Property(property="title", type="string", example="Buy cat food"),
+     *                       @OA\Property(property="description", type="string", example="Buy two cat bags"),
+     *                       @OA\Property(property="category", type="string", example="Task"),
+     *                       @OA\Property(property="color", type="string", example="456456"),
+     *                       @OA\Property(property="start_date", type="string", example="2024-05-20"),
+     *                       @OA\Property(property="end_date", type="string", example="2024-05-20"),
+     *                       @OA\Property(property="created_at", type="string", example="2024-05-14T19:38:33.000000Z"),
+     *                       @OA\Property(property="updated_at", type="string", example="2024-05-14T19:38:33.000000Z"),
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error: Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Unauthenticated"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Invalid credentials",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=403),
+     *             @OA\Property(property="message", type="string", example="Unauthorized"),
+     *             @OA\Property(property="data", type="object", example=null),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Task not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="intger", example=404),
+     *             @OA\Property(property="message", type="string", example="Task not found"),
+     *             @OA\Property(property="data", type="object", example=null),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Task creation failed",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=422),
+     *             @OA\Property(property="message", type="string", example="Task creation failed"),
+     *             @OA\Property(property="data", type="object",
+     *                 @OA\Property(property="errors", type="object",
+     *                     @OA\Property(property="description", type="array",
+     *                        @OA\Items(type="string", example="description is required")
+     *                     ),
+     *                      @OA\Property(property="start_date", type="array",
+     *                         @OA\Items(type="string", example={
+     *                             "The start date field must be a valid date.",
+     *                             "The start date field must be a date before end date."
+     *                         })
+     *                     )
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *  )
+     */
     public function update(Request $request, $id){
 
         $rules = array(
@@ -305,6 +479,70 @@ class TasksController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/tasks/{task}",
+     *     security={{"passport":{}}},
+     *     tags={"Tasks"},
+     *     summary="Delete task",
+     *     @OA\Parameter(
+     *         name="task",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *         description="ID of the task"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=200),
+     *             @OA\Property(property="message", type="string", example="Task deleted successfully"),
+     *             @OA\Property(property="data", type="object",
+     *                 @OA\Property(property="task", type="object",
+     *                       @OA\Property(property="id", type="integer", example="1"),
+     *                       @OA\Property(property="user_id_register", type="integer", example=1),
+     *                       @OA\Property(property="id_task_status", type="integer", example=1),
+     *                       @OA\Property(property="title", type="string", example="Buy cat food"),
+     *                       @OA\Property(property="description", type="string", example="Buy two cat bags"),
+     *                       @OA\Property(property="category", type="string", example="Task"),
+     *                       @OA\Property(property="color", type="string", example="456456"),
+     *                       @OA\Property(property="start_date", type="string", example="2024-05-20"),
+     *                       @OA\Property(property="end_date", type="string", example="2024-05-20"),
+     *                       @OA\Property(property="deleted_at", type="string", example="2024-05-20T19:35:00.000000Z"),
+     *                       @OA\Property(property="created_at", type="string", example="2024-05-14T19:38:33.000000Z"),
+     *                       @OA\Property(property="updated_at", type="string", example="2024-05-14T19:38:33.000000Z"),
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error: Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Unauthenticated"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Invalid credentials",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=403),
+     *             @OA\Property(property="message", type="string", example="Unauthorized"),
+     *             @OA\Property(property="data", type="object", example=null),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Task not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="intger", example=404),
+     *             @OA\Property(property="message", type="string", example="Task not found"),
+     *             @OA\Property(property="data", type="object", example=null),
+     *         )
+     *     ),
+     *  )
+     */
     public function destroy($id){
 
         $task = Task::find($id);
@@ -323,6 +561,70 @@ class TasksController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/tasks/restore/{task}",
+     *     security={{"passport":{}}},
+     *     tags={"Tasks"},
+     *     summary="Restore task",
+     *     @OA\Parameter(
+     *         name="task",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *         description="ID of the task"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=200),
+     *             @OA\Property(property="message", type="string", example="Task restored successfully"),
+     *             @OA\Property(property="data", type="object",
+     *                 @OA\Property(property="task", type="object",
+     *                       @OA\Property(property="id", type="integer", example="1"),
+     *                       @OA\Property(property="user_id_register", type="integer", example=1),
+     *                       @OA\Property(property="id_task_status", type="integer", example=1),
+     *                       @OA\Property(property="title", type="string", example="Buy cat food"),
+     *                       @OA\Property(property="description", type="string", example="Buy two cat bags"),
+     *                       @OA\Property(property="category", type="string", example="Task"),
+     *                       @OA\Property(property="color", type="string", example="456456"),
+     *                       @OA\Property(property="start_date", type="string", example="2024-05-20"),
+     *                       @OA\Property(property="end_date", type="string", example="2024-05-20"),
+     *                       @OA\Property(property="deleted_at", type="object", example=null),
+     *                       @OA\Property(property="created_at", type="string", example="2024-05-14T19:38:33.000000Z"),
+     *                       @OA\Property(property="updated_at", type="string", example="2024-05-14T19:38:33.000000Z"),
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error: Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Unauthenticated"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Invalid credentials",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=403),
+     *             @OA\Property(property="message", type="string", example="Unauthorized"),
+     *             @OA\Property(property="data", type="object", example=null),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Task not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="intger", example=404),
+     *             @OA\Property(property="message", type="string", example="Task not found"),
+     *             @OA\Property(property="data", type="object", example=null),
+     *         )
+     *     ),
+     *  )
+     */
     public function restore($id){
         $task = Task::find($id);
 
