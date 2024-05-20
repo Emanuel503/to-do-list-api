@@ -12,7 +12,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
-Route::get('/unauthorized', [AuthController::class, 'unauthorized'])->name('unauthorized');
+Route::any('/unauthorized', [AuthController::class, 'unauthorized'])->name('unauthorized');
 
 Route::middleware('auth:api')->group(function(){
 
