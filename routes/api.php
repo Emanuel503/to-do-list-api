@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RolesController;
 use App\Http\Controllers\TasksCategoriesController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\UsersController;
@@ -23,6 +24,11 @@ Route::middleware('auth:api')->group(function(){
             Route::get('/', [UsersController::class, 'index'])->name('index');
             Route::get('/{user}', [UsersController::class, 'show'])->name('show');
             Route::post('/', [UsersController::class, 'store'])->name('store');
+        });
+
+        Route::prefix('roles')->name('admin.roles.')->group(function(){
+            Route::get('/', [RolesController::class, 'index'])->name('index');
+            Route::get('/{rol}', [RolesController::class, 'show'])->name('show');
         });
     });
 
