@@ -128,7 +128,7 @@ class TasksController extends Controller
      *     path="/api/tasks/{task}",
      *     security={{"passport":{}}},
      *     tags={"Tasks"},
-     *     summary="Returns a tasks",
+     *     summary="Get a tasks",
      *     @OA\Parameter(
      *         name="task",
      *         in="path",
@@ -212,7 +212,7 @@ class TasksController extends Controller
      *     path="/api/tasks",
      *     security={{"passport":{}}},
      *     tags={"Tasks"},
-     *     summary="Register a task",
+     *     summary="Save task",
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -642,6 +642,77 @@ class TasksController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/tasks/share/{task}/{user}",
+     *     security={{"passport":{}}},
+     *     tags={"Tasks"},
+     *     summary="Save share task",
+     *     @OA\Parameter(
+     *         name="task",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *         description="ID of the task"
+     *     ),
+     *     @OA\Parameter(
+     *         name="user",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *         description="ID of the user"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=200),
+     *             @OA\Property(property="message", type="string", example="Task shared successfully"),
+     *             @OA\Property(property="data", type="object",
+     *                 @OA\Property(property="task", type="object",
+     *                       @OA\Property(property="id", type="integer", example="1"),
+     *                       @OA\Property(property="user_id_register", type="integer", example=1),
+     *                       @OA\Property(property="id_task_status", type="integer", example=1),
+     *                       @OA\Property(property="title", type="string", example="Buy cat food"),
+     *                       @OA\Property(property="description", type="string", example="Buy two cat bags"),
+     *                       @OA\Property(property="category", type="string", example="Task"),
+     *                       @OA\Property(property="color", type="string", example="456456"),
+     *                       @OA\Property(property="start_date", type="string", example="2024-05-20"),
+     *                       @OA\Property(property="end_date", type="string", example="2024-05-20"),
+     *                       @OA\Property(property="deleted_at", type="object", example=null),
+     *                       @OA\Property(property="created_at", type="string", example="2024-05-14T19:38:33.000000Z"),
+     *                       @OA\Property(property="updated_at", type="string", example="2024-05-14T19:38:33.000000Z"),
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error: Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Unauthenticated"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Invalid credentials",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=403),
+     *             @OA\Property(property="message", type="string", example="Unauthorized"),
+     *             @OA\Property(property="data", type="object", example=null),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Task shared failed",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="intger", example=404),
+     *             @OA\Property(property="message", type="string", example="Task shared failed"),
+     *             @OA\Property(property="data", type="object", example=null),
+     *         )
+     *     ),
+     *  )
+     */
     public function share($task, $user){
 
         $task = Task::find($task);
@@ -677,6 +748,62 @@ class TasksController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/tasks/share/{task}/{user}",
+     *     security={{"passport":{}}},
+     *     tags={"Tasks"},
+     *     summary="Delete shared task",
+     *     @OA\Parameter(
+     *         name="task",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *         description="ID of the task"
+     *     ),
+     *     @OA\Parameter(
+     *         name="user",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *         description="ID of the user"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=200),
+     *             @OA\Property(property="message", type="string", example="Task shared deleted successfully"),
+     *             @OA\Property(property="data", type="object", example=null)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error: Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Unauthenticated"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Invalid credentials",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=403),
+     *             @OA\Property(property="message", type="string", example="Unauthorized"),
+     *             @OA\Property(property="data", type="object", example=null),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Task not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="intger", example=404),
+     *             @OA\Property(property="message", type="string", example="Task not found"),
+     *             @OA\Property(property="data", type="object", example=null),
+     *         )
+     *     ),
+     *  )
+     */
     public function deleteShare($task, $user){
 
         $shared = SharedTask::where(['id_user' => $user, 'id_task' => $task])->first();

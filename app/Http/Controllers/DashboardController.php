@@ -14,7 +14,7 @@ class DashboardController extends Controller
      *     path="/api/dashboard",
      *     security={{"passport":{}}},
      *     tags={"Auth"},
-     *     summary="Dashboard Admin return information of system",
+     *     summary="Dashboard admin return information of system",
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",

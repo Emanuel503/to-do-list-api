@@ -327,7 +327,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "Dashboard Admin return information of system",
+                "summary": "Dashboard admin return information of system",
                 "operationId": "2426415c7c4fc4c2674b0dff0ead6df1",
                 "responses": {
                     "200": {
@@ -400,7 +400,7 @@
                 "tags": [
                     "Categories"
                 ],
-                "summary": "Get categories return a array of categories",
+                "summary": "Get list of categories",
                 "operationId": "0e6c76e2e80c2dc85b5acade402ea492",
                 "responses": {
                     "200": {
@@ -708,7 +708,7 @@
                 "tags": [
                     "Tasks"
                 ],
-                "summary": "Register a task",
+                "summary": "Save task",
                 "operationId": "c55168b216f825bfb38201acb8ddba12",
                 "requestBody": {
                     "required": true,
@@ -921,7 +921,7 @@
                 "tags": [
                     "Tasks"
                 ],
-                "summary": "Returns a tasks",
+                "summary": "Get a tasks",
                 "operationId": "0601826fbcb29466207f929545df29e9",
                 "parameters": [
                     {
@@ -1674,12 +1674,312 @@
                 ]
             }
         },
+        "/api/tasks/share/{task}/{user}": {
+            "post": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Save share task",
+                "operationId": "1ad6d0c77b3573b187ed3cb708c7fa9e",
+                "parameters": [
+                    {
+                        "name": "task",
+                        "in": "path",
+                        "description": "ID of the task",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID of the user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Task shared successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "task": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": "1"
+                                                        },
+                                                        "user_id_register": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "id_task_status": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "title": {
+                                                            "type": "string",
+                                                            "example": "Buy cat food"
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "example": "Buy two cat bags"
+                                                        },
+                                                        "category": {
+                                                            "type": "string",
+                                                            "example": "Task"
+                                                        },
+                                                        "color": {
+                                                            "type": "string",
+                                                            "example": "456456"
+                                                        },
+                                                        "start_date": {
+                                                            "type": "string",
+                                                            "example": "2024-05-20"
+                                                        },
+                                                        "end_date": {
+                                                            "type": "string",
+                                                            "example": "2024-05-20"
+                                                        },
+                                                        "deleted_at": {
+                                                            "type": "object",
+                                                            "example": null
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "example": "2024-05-14T19:38:33.000000Z"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "example": "2024-05-14T19:38:33.000000Z"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error: Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 403
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Task shared failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "intger",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Task shared failed"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Delete shared task",
+                "operationId": "efa091b9eb51df3412db2546bc9a293b",
+                "parameters": [
+                    {
+                        "name": "task",
+                        "in": "path",
+                        "description": "ID of the task",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID of the user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Task shared deleted successfully"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error: Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 403
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Task not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "intger",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Task not found"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
         "/api/users": {
             "get": {
                 "tags": [
                     "Users"
                 ],
-                "summary": "Get Users return a array of users",
+                "summary": "Get list of users",
                 "operationId": "eaedf6aa84fde38a08bf5d87308169f7",
                 "responses": {
                     "200": {
@@ -1790,7 +2090,7 @@
                 "tags": [
                     "Users"
                 ],
-                "summary": "Register user",
+                "summary": "Save a user",
                 "operationId": "e2308aae8643f8f4d79821a6399114f3",
                 "requestBody": {
                     "required": true,
@@ -2010,7 +2310,7 @@
                 "tags": [
                     "Users"
                 ],
-                "summary": "Get User return a user",
+                "summary": "Get a user",
                 "operationId": "dd08c53b3be10f887e141b15a012476e",
                 "parameters": [
                     {

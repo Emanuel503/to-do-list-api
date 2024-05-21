@@ -14,7 +14,7 @@ class UsersController extends Controller
      *     path="/api/users",
      *     security={{"passport":{}}},
      *     tags={"Users"},
-     *     summary="Get Users return a array of users",
+     *     summary="Get list of users",
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
@@ -70,7 +70,7 @@ class UsersController extends Controller
      *     path="/api/users/{user}",
      *     security={{"passport":{}}},
      *     tags={"Users"},
-     *     summary="Get User return a user",
+     *     summary="Get a user",
      *      @OA\Parameter(
      *         name="user",
      *         in="path",
@@ -131,7 +131,7 @@ class UsersController extends Controller
      *     path="/api/users",
      *     security={{"passport":{}}},
      *     tags={"Users"},
-     *     summary="Register user",
+     *     summary="Save a user",
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\MediaType(

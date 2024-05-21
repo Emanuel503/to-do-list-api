@@ -14,7 +14,7 @@ class TasksCategoriesController extends Controller
      *     path="/api/categories",
      *     security={{"passport":{}}},
      *     tags={"Categories"},
-     *     summary="Get categories return a array of categories",
+     *     summary="Get list of categories",
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
