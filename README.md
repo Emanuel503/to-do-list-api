@@ -103,7 +103,7 @@ Registro de usuarios ✅
 
 Usuario administardor
 - Listar todos los usuarios ✅
-- Listar grupos y roles
+- Listar grupos y roles ✅
 - Dashboard (Ver el trafico de usuarios conectados, cantidad de registros, usuarios conectados, etc) 
 
 Validaciones ✅
@@ -111,4 +111,4 @@ Validaciones ✅
 - Los usuarios solo pueden manipular la apliacion solo cuando esten autenticados ✅
 - Validar las rutas por roles ✅
 
-Documentar todos los endpoints de la API
+Documentar todos los endpoints de la API ✅
