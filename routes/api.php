@@ -33,6 +33,8 @@ Route::middleware('auth:api')->group(function(){
     });
 
     Route::group(['middleware' => ['role:Admin|User',]], function () {
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
         Route::prefix('tasks')->name('user.tasks.')->group(function () {
             Route::get('/', [TasksController::class, 'index'])->name('index');
             Route::get('/{task}', [TasksController::class, 'show'])->middleware(EnsureTaskBelongsToUser::class)->name('show');

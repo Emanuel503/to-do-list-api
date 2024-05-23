@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Passport\Token;
 
 /**
  * @OA\Info(
@@ -260,6 +261,55 @@ class AuthController extends Controller
                 'token_type'    => 'Bearer',
                 'user'          => $user
             ]
+        ]);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/logout",
+     *     security={{"passport":{}}},
+     *     tags={"Auth"},
+     *     summary="Logout user",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=200),
+     *             @OA\Property(property="message", type="string", example="Login success"),
+     *             @OA\Property(property="data", type="object", example=null)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Invalid credentials",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Unauthenticated"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Invalid credentials",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="number", example=403),
+     *             @OA\Property(property="message", type="string", example="Unauthorized"),
+     *             @OA\Property(property="data", type="object", example=null),
+     *         )
+     *     )
+     * )
+     */
+    public function logout()
+    {
+        $user = Auth::user();
+
+        // Revocar todos los tokens de acceso del usuario
+        $user->tokens->each(function (Token $token, $key) {
+            $token->delete();
+        });
+
+        return response()->json([
+            'code'      => 200,
+            'message'   => 'Logout',
+            'data'      => null
         ]);
     }
 
