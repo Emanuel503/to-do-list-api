@@ -148,14 +148,15 @@ class AuthController extends Controller
         }
 
         if ($request->hasFile('image')) {
-            $image = $request->file('image')->store('public/images');
+            $imagePath = $request->file('image')->store('public/images');
+            $imageName = basename($imagePath);
         }
 
         $user = User::create([
             'name'          => $request->name,
             'email'         => $request->email,
             'password'      => Hash::make($request->password),
-            'image'         => $image ?? null
+            'image'         => $imageName ?? null,
         ]);
 
         $user->assignRole('User');
