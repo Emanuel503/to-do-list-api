@@ -51,11 +51,3 @@ Route::middleware('auth:api')->group(function(){
         });
     });
 });
-
-//Faltantes
-/*
-    -Ver pefil de usuarios
-    -Modificar el perfil de usuario (Los administradores pueden cambiarel rol)
-    -Paginar todos lo ends points que listan tablas
-
-*/
