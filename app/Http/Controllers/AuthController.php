@@ -13,7 +13,7 @@ use Laravel\Passport\Token;
  * @OA\Info(
  *    title="API TASK",
  *    version="1.0.0",
- *    description="Swagger documentation for API TASK",
+ *    description="Rest Full API for the task application in which you can perform different actions depending on the user's role<br> <li>Task management</li> <li>User Management</li> <li>Role management</li> <li>User Registration</li> <br> API authentication works with bearer token",
  *    @OA\Contact(
  *         email="emanueljosemolina@gmail.com"
  *    )
