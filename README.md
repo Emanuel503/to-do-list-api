@@ -91,7 +91,7 @@ Restaurar tareas ✅
 
 Compartir tareas con otra persona ✅
 
-Las tareas que son elimiadas quedaran en la papelera durante 30 dias, luego de ese tiempo seran eliminadas
+Las tareas que son elimiadas quedaran en la papelera durante 30 dias, luego de ese tiempo seran eliminadas ✅
 
 Inicio de sesion con roles ✅
 
