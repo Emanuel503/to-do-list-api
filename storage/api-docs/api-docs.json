@@ -2571,30 +2571,6 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Invalid credentials",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "number",
-                                            "example": 403
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Password or email is invalid"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "example": null
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
                     "422": {
                         "description": "User created error",
                         "content": {

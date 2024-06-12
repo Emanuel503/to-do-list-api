@@ -199,15 +199,6 @@ class UsersController extends Controller
      *         )
      *     ),
      *     @OA\Response(
-     *         response=403,
-     *         description="Invalid credentials",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="code", type="number", example=403),
-     *             @OA\Property(property="message", type="string", example="Password or email is invalid"),
-     *             @OA\Property(property="data", type="object", example=null),
-     *         )
-     *     ),
-     *     @OA\Response(
      *         response=422,
      *         description="User created error",
      *         @OA\JsonContent(
