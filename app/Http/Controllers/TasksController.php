@@ -289,12 +289,12 @@ class TasksController extends Controller
     public function store(Request $request){
 
         $rules = array(
-            'title'             => 'string|min:1',
+            'title'             => 'string|min:1|nullable',
             'description'       => 'string|min:1|required',
-            'category'          => 'string|min:1',
-            'color'             => 'string|min:6',
-            'start_date'        => 'date|before:end_date',
-            'end_date'          => 'date|after:start_date',
+            'category'          => 'string|min:1|nullable',
+            'color'             => 'string|min:6|max:6|nullable',
+            'start_date'        => 'date|before:end_date|nullable',
+            'end_date'          => 'date|after:start_date|nullable',
         );
 
         $messages = array(
