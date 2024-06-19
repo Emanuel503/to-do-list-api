@@ -88,12 +88,19 @@ class TasksController extends Controller
      *     )
      * )
      */
-    public function index(){
-        $activeTasks = DB::table('tasks')
+    public function index(Request $request){
+
+        $activeTasksDB = DB::table('tasks')
                         ->join('users', 'users.id', '=' ,'tasks.user_id_register')
                         ->select('tasks.*', 'users.name as user_name_register')
-                        ->where(['id_task_status' => 1, 'user_id_register' => Auth::user()->id])
-                        ->get();
+                        ->where(['id_task_status' => 1, 'user_id_register' => Auth::user()->id]);
+
+        if ($request->get('category') != null) {
+            $category = $request->get('category') === "null" ? null : $request->get('category');
+            $activeTasksDB->where('category', $category);
+        }
+
+        $activeTasks = $activeTasksDB->get();
 
         $hiddenTasks = DB::table('tasks')
                         ->join('users', 'users.id', '=' ,'tasks.user_id_register')
