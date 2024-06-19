@@ -402,14 +402,87 @@
                 ]
             }
         },
-        "/api/profile": {
+        "/api/dashboard": {
             "get": {
                 "tags": [
                     "Auth"
                 ],
+                "summary": "Dashboard admin return information of system",
+                "operationId": "2426415c7c4fc4c2674b0dff0ead6df1",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Dashboard successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "count_users": {
+                                                    "type": "integer",
+                                                    "example": "40"
+                                                },
+                                                "count_tasks": {
+                                                    "type": "integer",
+                                                    "example": "56"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": 403
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/profile": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
                 "summary": "Get profile of login user",
                 "description": "Returns a information of login user",
-                "operationId": "d32e56b6274eb68e980da6d91fbe9fd8",
+                "operationId": "7e2ad4e5c1c526853f4b99982a934c0c",
                 "responses": {
                     "200": {
                         "description": "Profile successfully",
@@ -526,79 +599,6 @@
                         }
                     },
                     "403": {
-                        "description": "Invalid credentials",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "number",
-                                            "example": 403
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "example": null
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "passport": []
-                    }
-                ]
-            }
-        },
-        "/api/dashboard": {
-            "get": {
-                "tags": [
-                    "Auth"
-                ],
-                "summary": "Dashboard admin return information of system",
-                "operationId": "2426415c7c4fc4c2674b0dff0ead6df1",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "number",
-                                            "example": 200
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Dashboard successfully"
-                                        },
-                                        "data": {
-                                            "properties": {
-                                                "count_users": {
-                                                    "type": "integer",
-                                                    "example": "40"
-                                                },
-                                                "count_tasks": {
-                                                    "type": "integer",
-                                                    "example": "56"
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
                         "description": "Invalid credentials",
                         "content": {
                             "application/json": {

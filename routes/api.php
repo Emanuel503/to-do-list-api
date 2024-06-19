@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileControlller;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\TasksCategoriesController;
 use App\Http\Controllers\TasksController;
@@ -35,7 +36,7 @@ Route::middleware('auth:api')->group(function(){
     Route::group(['middleware' => ['role:Admin|User',]], function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-        Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+        Route::get('/profile', [ProfileControlller::class, 'show'])->name('show');
 
         Route::prefix('tasks')->name('user.tasks.')->group(function () {
             Route::get('/', [TasksController::class, 'index'])->name('index');
