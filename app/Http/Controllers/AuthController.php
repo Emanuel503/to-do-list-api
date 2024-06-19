@@ -94,8 +94,8 @@ class AuthController extends Controller
      *         response=422,
      *         description="User created error",
      *         @OA\JsonContent(
-     *             @OA\Property(property="code", type="number", example=401),
-     *             @OA\Property(property="message", type="string", example="Password or email is invalid"),
+     *             @OA\Property(property="code", type="number", example=422),
+     *             @OA\Property(property="message", type="string", example="User created error"),
      *             @OA\Property(property="data", type="object",
      *                 @OA\Property(property="errors", type="object",
      *                     @OA\Property(property="email", type="array",

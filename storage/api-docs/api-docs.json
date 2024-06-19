@@ -147,11 +147,11 @@
                                     "properties": {
                                         "code": {
                                             "type": "number",
-                                            "example": 401
+                                            "example": 422
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "Password or email is invalid"
+                                            "example": "User created error"
                                         },
                                         "data": {
                                             "properties": {
