@@ -1203,6 +1203,17 @@
                 "summary": "Get list of tasks",
                 "description": "Returns a list of tasks categorized by their status",
                 "operationId": "49e73b9da657e3e2dac88d10e4ffaa4b",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "description": "Filter tasks by category",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "List of tasks successfully",

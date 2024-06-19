@@ -21,6 +21,15 @@ class TasksController extends Controller
      *     tags={"Tasks"},
      *     summary="Get list of tasks",
      *     description="Returns a list of tasks categorized by their status",
+     *     @OA\Parameter(
+     *         name="category",
+     *         in="query",
+     *         description="Filter tasks by category",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="List of tasks successfully",
