@@ -37,6 +37,7 @@ Route::middleware('auth:api')->group(function(){
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
         Route::get('/profile', [ProfileControlller::class, 'show'])->name('show');
+        Route::post('/profile', [ProfileControlller::class, 'update'])->name('update');
 
         Route::prefix('tasks')->name('user.tasks.')->group(function () {
             Route::get('/', [TasksController::class, 'index'])->name('index');
